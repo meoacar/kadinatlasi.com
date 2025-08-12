@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KadınAtlası Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #E57399, #F5A9BC);
+            margin: 0;
+            padding: 50px;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 { color: #E57399; }
+        .btn {
+            background: #E57399;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover { background: #d1648a; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌸 KadınAtlası Test Sayfası</h1>
+        <p>Bu sayfa çalışıyorsa, Laravel server'ı aktif demektir.</p>
+        
+        <h2>Erişim Linkleri:</h2>
+        <a href="/" class="btn">Ana Sayfa (SPA)</a>
+        <a href="/admin" class="btn">Admin Panel</a>
+        <a href="/api" class="btn">API</a>
+        
+        <h3>Önemli Not:</h3>
+        <p><strong>localhost:5173 KULLANMAYIN!</strong></p>
+        <p><strong>localhost:8000 kullanın!</strong></p>
+        
+        <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
+            <h4>Doğru URL'ler:</h4>
+            <p>✅ Ana Site: <strong>http://localhost:8000</strong></p>
+            <p>✅ Admin: <strong>http://localhost:8000/admin</strong></p>
+            <p>❌ Kullanmayın: <strike>localhost:5173</strike></p>
+        </div>
+    </div>
+</body>
+</html>

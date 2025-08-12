@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KadınAtlası - Kadınlar İçin Dijital Platform</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#E57399">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="KadınAtlası">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Kadınların günlük hayatını kolaylaştıran, bilgi alabileceği ve topluluk oluşturabileceği dijital platform">
+    <meta name="keywords" content="kadın sağlığı, gebelik, regl döngüsü, güzellik, moda, forum, hesaplayıcı">
+    <meta name="author" content="KadınAtlası">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="KadınAtlası - Kadınlar İçin Dijital Platform">
+    <meta property="og:description" content="Kadınların günlük hayatını kolaylaştıran, bilgi alabileceği ve topluluk oluşturabileceği dijital platform">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kadinatlasi.com">
+    <meta property="og:image" content="https://kadinatlasi.com/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KadınAtlası - Kadınlar İçin Dijital Platform">
+    <meta name="twitter:description" content="Kadınların günlük hayatını kolaylaştıran, bilgi alabileceği ve topluluk oluşturabileceği dijital platform">
+    <meta name="twitter:image" content="https://kadinatlasi.com/og-image.jpg">
+    <script type="module" crossorigin src="/assets/index-BwQsNOTg.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CPwFJ_a5.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-8bHmCTy0.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

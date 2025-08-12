@@ -1,0 +1,133 @@
+<?php
+
+namespace App\Filament\Pages;
+
+use App\Models\PaymentSetting;
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Pages\Page;
+use Filament\Actions\Action;
+use Filament\Notifications\Notification;
+
+class IyzicoSettings extends Page
+{
+    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
+    protected static ?string $navigationLabel = 'İyzico Ayarları';
+    protected static ?string $title = 'İyzico Ödeme Ayarları';
+    protected static ?string $navigationGroup = 'Premium Üyelik';
+    protected static ?int $navigationSort = 7;
+
+    protected static string $view = 'filament.pages.iyzico-settings';
+
+    public ?array $data = [];
+
+    public function mount(): void
+    {
+        $this->form->fill([
+            'iyzico_api_key' => PaymentSetting::get('iyzico_api_key'),
+            'iyzico_secret_key' => PaymentSetting::get('iyzico_secret_key'),
+            'iyzico_base_url' => PaymentSetting::get('iyzico_base_url'),
+            'iyzico_test_mode' => PaymentSetting::get('iyzico_test_mode') === '1',
+            'payment_currency' => PaymentSetting::get('payment_currency'),
+            'payment_success_url' => PaymentSetting::get('payment_success_url'),
+            'payment_failed_url' => PaymentSetting::get('payment_failed_url'),
+        ]);
+    }
+
+    public function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\Section::make('İyzico API Bilgileri')
+                    ->description('İyzico panelinden aldığınız API bilgilerini buraya girin.')
+                    ->schema([
+                        Forms\Components\TextInput::make('iyzico_api_key')
+                            ->label('API Key')
+                            ->password()
+                            ->required()
+                            ->helperText('İyzico panelinden alacağınız API anahtarı'),
+                            
+                        Forms\Components\TextInput::make('iyzico_secret_key')
+                            ->label('Secret Key')
+                            ->password()
+                            ->required()
+                            ->helperText('İyzico panelinden alacağınız gizli anahtar'),
+                            
+                        Forms\Components\TextInput::make('iyzico_base_url')
+                            ->label('Base URL')
+                            ->url()
+                            ->required()
+                            ->default('https://sandbox-api.iyzipay.com')
+                            ->helperText('Test: https://sandbox-api.iyzipay.com | Canlı: https://api.iyzipay.com'),
+                            
+                        Forms\Components\Toggle::make('iyzico_test_mode')
+                            ->label('Test Modu')
+                            ->helperText('Test modunda çalışsın mı? Canlıya geçerken kapatın.')
+                            ->default(true),
+                    ])->columns(2),
+                    
+                Forms\Components\Section::make('Genel Ödeme Ayarları')
+                    ->schema([
+                        Forms\Components\Select::make('payment_currency')
+                            ->label('Para Birimi')
+                            ->options([
+                                'TRY' => 'Türk Lirası (TRY)',
+                                'USD' => 'Amerikan Doları (USD)',
+                                'EUR' => 'Euro (EUR)',
+                            ])
+                            ->required()
+                            ->default('TRY'),
+                            
+                        Forms\Components\TextInput::make('payment_success_url')
+                            ->label('Başarı Sayfası URL')
+                            ->required()
+                            ->default('/premium/success')
+                            ->helperText('Ödeme başarılı olduğunda yönlendirilecek sayfa'),
+                            
+                        Forms\Components\TextInput::make('payment_failed_url')
+                            ->label('Hata Sayfası URL')
+                            ->required()
+                            ->default('/premium/failed')
+                            ->helperText('Ödeme başarısız olduğunda yönlendirilecek sayfa'),
+                    ])->columns(3),
+            ])
+            ->statePath('data');
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            Action::make('save')
+                ->label('Ayarları Kaydet')
+                ->submit('save'),
+        ];
+    }
+
+    public function save(): void
+    {
+        $data = $this->form->getState();
+        
+        // Ensure all values are strings
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = json_encode($value);
+            }
+        }
+
+        // İyzico ayarlarını kaydet
+        PaymentSetting::set('iyzico_api_key', $data['iyzico_api_key']);
+        PaymentSetting::set('iyzico_secret_key', $data['iyzico_secret_key']);
+        PaymentSetting::set('iyzico_base_url', $data['iyzico_base_url']);
+        PaymentSetting::set('iyzico_test_mode', $data['iyzico_test_mode'] ? '1' : '0');
+        
+        // Genel ayarları kaydet
+        PaymentSetting::set('payment_currency', $data['payment_currency']);
+        PaymentSetting::set('payment_success_url', $data['payment_success_url']);
+        PaymentSetting::set('payment_failed_url', $data['payment_failed_url']);
+
+        Notification::make()
+            ->title('Ayarlar kaydedildi')
+            ->success()
+            ->send();
+    }
+}
