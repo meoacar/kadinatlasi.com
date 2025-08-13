@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('expert_id')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('category_id');
             $table->string('title');
             $table->text('question');
             $table->text('answer')->nullable();
@@ -20,6 +20,8 @@ return new class extends Migration
             $table->boolean('is_public')->default(false);
             $table->timestamp('answered_at')->nullable();
             $table->timestamps();
+            
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
