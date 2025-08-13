@@ -105,7 +105,7 @@ const calculate = () => {
   loading.value = true
   
   setTimeout(() => {
-    const h = height.value
+    const h = height.value || 0
     const isFemale = gender.value === 'female'
     
     // Robinson Formula

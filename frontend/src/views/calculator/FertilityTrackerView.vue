@@ -144,10 +144,11 @@ const calculate = () => {
   setTimeout(() => {
     // Age factor
     let ageFactor = 1
-    if (age.value <= 24) ageFactor = 0.86
-    else if (age.value <= 29) ageFactor = 0.78
-    else if (age.value <= 34) ageFactor = 0.63
-    else if (age.value <= 39) ageFactor = 0.52
+    const ageValue = age.value || 0
+    if (ageValue <= 24) ageFactor = 0.86
+    else if (ageValue <= 29) ageFactor = 0.78
+    else if (ageValue <= 34) ageFactor = 0.63
+    else if (ageValue <= 39) ageFactor = 0.52
     else ageFactor = 0.36
     
     // Cycle regularity factor

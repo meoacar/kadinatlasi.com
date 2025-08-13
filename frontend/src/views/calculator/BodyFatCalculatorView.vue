@@ -149,13 +149,13 @@ const calculate = () => {
     let bodyFat: number
     
     if (gender.value === 'male') {
-      bodyFat = 495 / (1.0324 - 0.19077 * Math.log10(waist.value - neck.value) + 0.15456 * Math.log10(height.value)) - 450
+      bodyFat = 495 / (1.0324 - 0.19077 * Math.log10((waist.value || 0) - (neck.value || 0)) + 0.15456 * Math.log10(height.value || 0)) - 450
     } else {
-      bodyFat = 495 / (1.29579 - 0.35004 * Math.log10(waist.value + hip.value! - neck.value) + 0.22100 * Math.log10(height.value)) - 450
+      bodyFat = 495 / (1.29579 - 0.35004 * Math.log10((waist.value || 0) + (hip.value || 0) - (neck.value || 0)) + 0.22100 * Math.log10(height.value || 0)) - 450
     }
     
-    const fatMass = (bodyFat / 100) * weight.value
-    const leanMass = weight.value - fatMass
+    const fatMass = (bodyFat / 100) * (weight.value || 0)
+    const leanMass = (weight.value || 0) - fatMass
     
     let category = ''
     let healthyRange = ''

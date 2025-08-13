@@ -90,7 +90,7 @@ const calculate = () => {
   loading.value = true
   
   setTimeout(() => {
-    const lastPeriodDate = new Date(lastPeriod.value)
+    const lastPeriodDate = new Date(lastPeriod.value || '')
     const ovulationDate = new Date(lastPeriodDate)
     ovulationDate.setDate(lastPeriodDate.getDate() + 14)
     
@@ -101,7 +101,7 @@ const calculate = () => {
     fertileEnd.setDate(ovulationDate.getDate() + 1)
     
     const nextPeriod = new Date(lastPeriodDate)
-    nextPeriod.setDate(lastPeriodDate.getDate() + cycleLength.value)
+    nextPeriod.setDate(lastPeriodDate.getDate() + (cycleLength.value || 28))
     
     result.value = {
       ovulationDate,

@@ -110,7 +110,7 @@ const calculate = () => {
   loading.value = true
   
   setTimeout(() => {
-    const lastPeriodDate = new Date(lastPeriod.value)
+    const lastPeriodDate = new Date(lastPeriod.value || '')
     const today = new Date()
     
     const daysSinceLastPeriod = Math.floor((today.getTime() - lastPeriodDate.getTime()) / (1000 * 60 * 60 * 24))

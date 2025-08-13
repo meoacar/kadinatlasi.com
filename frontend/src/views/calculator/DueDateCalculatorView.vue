@@ -112,7 +112,7 @@ const calculate = () => {
   loading.value = true
   
   setTimeout(() => {
-    const lastPeriodDate = new Date(lastPeriod.value)
+    const lastPeriodDate = new Date(lastPeriod.value || '')
     const dueDate = new Date(lastPeriodDate)
     dueDate.setDate(lastPeriodDate.getDate() + 280)
     

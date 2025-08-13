@@ -164,9 +164,9 @@ const calculate = () => {
     // BMR calculation (Mifflin-St Jeor Equation)
     let bmr: number
     if (gender.value === 'male') {
-      bmr = 10 * weight.value + 6.25 * height.value - 5 * age.value + 5
+      bmr = 10 * (weight.value || 0) + 6.25 * (height.value || 0) - 5 * (age.value || 0) + 5
     } else {
-      bmr = 10 * weight.value + 6.25 * height.value - 5 * age.value - 161
+      bmr = 10 * (weight.value || 0) + 6.25 * (height.value || 0) - 5 * (age.value || 0) - 161
     }
     
     // Activity multiplier

@@ -106,7 +106,7 @@ const calculate = () => {
   loading.value = true
   
   setTimeout(() => {
-    const lastPeriodDate = new Date(lastPeriod.value)
+    const lastPeriodDate = new Date(lastPeriod.value || '')
     const today = new Date()
     
     const nextPeriod = new Date(lastPeriodDate)
