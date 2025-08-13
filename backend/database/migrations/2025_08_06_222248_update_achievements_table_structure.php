@@ -15,7 +15,7 @@ return new class extends Migration
         // Recreate achievements table
         Schema::create('achievements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('achievement_categories')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description');
@@ -31,6 +31,8 @@ return new class extends Migration
             $table->boolean('is_hidden')->default(false);
             $table->integer('sort_order')->default(0);
             $table->timestamps();
+            
+            $table->foreign('category_id')->references('id')->on('achievement_categories')->onDelete('set null');
         });
 
         // Recreate user_achievements table
