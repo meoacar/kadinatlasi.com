@@ -246,6 +246,18 @@ class User extends Authenticatable
         return $value;
     }
 
+    // Filament avatar method
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar ? asset('storage/' . $this->avatar) : null;
+    }
+
+    // Filament name method
+    public function getFilamentName(): string
+    {
+        return $this->name ?? $this->email;
+    }
+
     private function calculateZodiacSign($date)
     {
         $month = $date->month;

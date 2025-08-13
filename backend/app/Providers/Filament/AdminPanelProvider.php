@@ -40,11 +40,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                \App\Filament\Widgets\StatsOverview::class,
-                \App\Filament\Widgets\AdvancedStatsWidget::class,
-                \App\Filament\Widgets\PerformanceWidget::class,
-                \App\Filament\Widgets\UserStatsWidget::class,
-                \App\Filament\Widgets\ModerationWidget::class,
+                \App\Filament\Widgets\SimpleStatsWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -59,6 +55,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->authGuard('web');
     }
 }
