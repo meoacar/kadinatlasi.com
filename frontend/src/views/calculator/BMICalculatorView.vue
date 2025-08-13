@@ -114,8 +114,8 @@ const calculate = () => {
   loading.value = true
   
   setTimeout(() => {
-    const heightM = height.value / 100
-    const bmi = weight.value / (heightM * heightM)
+    const heightM = (height.value || 0) / 100
+    const bmi = (weight.value || 0) / (heightM * heightM)
     
     let category = ''
     let advice = ''

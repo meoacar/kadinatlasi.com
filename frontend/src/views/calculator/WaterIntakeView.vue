@@ -160,7 +160,7 @@ const calculate = () => {
   
   setTimeout(() => {
     // Base water need: 35ml per kg
-    let dailyWater = weight.value * 35
+    let dailyWater = (weight.value || 0) * 35
     
     // Activity adjustment
     const activityMultipliers: { [key: string]: number } = {

@@ -110,10 +110,10 @@ const calculate = () => {
     const today = new Date()
     
     const nextPeriod = new Date(lastPeriodDate)
-    nextPeriod.setDate(lastPeriodDate.getDate() + cycleLength.value)
+    nextPeriod.setDate(lastPeriodDate.getDate() + (cycleLength.value || 28))
     
     const ovulation = new Date(lastPeriodDate)
-    ovulation.setDate(lastPeriodDate.getDate() + cycleLength.value - 14)
+    ovulation.setDate(lastPeriodDate.getDate() + (cycleLength.value || 28) - 14)
     
     const fertileStart = new Date(ovulation)
     fertileStart.setDate(ovulation.getDate() - 5)
