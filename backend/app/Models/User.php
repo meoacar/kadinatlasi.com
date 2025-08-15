@@ -7,10 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Traits\HasAdvancedFilters;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens, HasRoles;
+    use HasFactory, Notifiable, HasApiTokens, HasRoles, HasAdvancedFilters;
 
     protected $fillable = [
         'name',
@@ -41,6 +42,15 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Aranabilir alanlar
+     */
+    protected $searchable = [
+        'name',
+        'email',
+        'membership_type'
+    ];
+
     // Relations
     public function profile()
     {
@@ -65,6 +75,11 @@ class User extends Authenticatable
     public function forumPosts()
     {
         return $this->hasMany(ForumPost::class);
+    }
+
+    public function adminActivities()
+    {
+        return $this->hasMany(AdminActivity::class, 'admin_id');
     }
 
     public function notifications()

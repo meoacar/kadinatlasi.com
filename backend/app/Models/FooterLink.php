@@ -10,34 +10,51 @@ class FooterLink extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'url',
-        'section',
+        'category',
+        'target',
+        'is_active',
         'sort_order',
-        'is_active'
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'sort_order' => 'integer',
     ];
 
+    /**
+     * Scope for active links
+     */
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
     }
 
+    /**
+     * Scope for specific category
+     */
+    public function scopeCategory($query, $category)
+    {
+        return $query->where('category', $category);
+    }
+
+    /**
+     * Scope for ordered links
+     */
     public function scopeOrdered($query)
     {
-        return $query->orderBy('sort_order')->orderBy('name');
+        return $query->orderBy('sort_order')->orderBy('title');
     }
 
-    public function scopeQuickLinks($query)
+    /**
+     * Get links grouped by category
+     */
+    public static function getGroupedLinks()
     {
-        return $query->where('section', 'quick_links');
-    }
-
-    public function scopeCategoryLinks($query)
-    {
-        return $query->where('section', 'category_links');
+        return self::active()
+            ->ordered()
+            ->get()
+            ->groupBy('category');
     }
 }

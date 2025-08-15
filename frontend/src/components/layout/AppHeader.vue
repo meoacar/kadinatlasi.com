@@ -51,7 +51,21 @@ onUnmounted(() => {
 })
 
 const navigation = [
-  { name: 'Hesaplama', href: '/hesaplama', icon: '🧮' },
+  { name: 'Ana Sayfa', href: '/', icon: '🏠' },
+  { name: 'Blog', href: '/blog', icon: '📝' },
+  { 
+    name: 'Hesaplama Araçları', 
+    href: '#',
+    icon: '🧮',
+    dropdown: [
+      { name: 'VKİ Hesaplayıcı', href: '/hesaplama/vki', icon: '⚖️' },
+      { name: 'Regl Takvimi', href: '/hesaplama/regl-takvimi', icon: '📅' },
+      { name: 'Gebelik Hesaplayıcı', href: '/hesaplama/gebelik', icon: '🤰' },
+      { name: 'Kalori Hesaplayıcı', href: '/hesaplama/kalori', icon: '🍎' },
+      { name: 'Su İhtiyacı', href: '/hesaplama/su-ihtiyaci', icon: '💧' },
+      { name: 'Finans Planlayıcı', href: '/hesaplama/finans', icon: '💰' }
+    ]
+  },
   { 
     name: 'Sağlık & Yaşam', 
     href: '#',
@@ -61,7 +75,8 @@ const navigation = [
       { name: 'Psikoloji', href: '/psikoloji', icon: '🧠' },
       { name: 'Astroloji', href: '/astroloji', icon: '⭐' },
       { name: 'Fitness & Diyet', href: '/fitness', icon: '💪' },
-      { name: 'Kariyer', href: '/kariyer', icon: '💼' }
+      { name: 'Tarifler', href: '/tarifler', icon: '🍽️' },
+      { name: 'Kariyer & Girişimcilik', href: '/kariyer', icon: '💼' }
     ]
   },
   { 
@@ -71,24 +86,36 @@ const navigation = [
     dropdown: [
       { name: 'Gebelik Takibi', href: '/gebelik-takibi', icon: '🤰' },
       { name: 'Bebek İsimleri', href: '/bebek-isimleri', icon: '👶' },
-      { name: 'Bebek Bakımı', href: '/bebek-bakimi', icon: '🍼' }
+      { name: 'Bebek Bakımı', href: '/bebek-bakimi', icon: '🍼' },
+      { name: 'Annelik Rehberi', href: '/annelik-rehberi', icon: '👩‍👧‍👦' }
     ]
   },
-  { name: 'Güzellik', href: '/guzellik', icon: '💄' },
+  { 
+    name: 'Güzellik & Moda', 
+    href: '#',
+    icon: '💄',
+    dropdown: [
+      { name: 'Güzellik İpuçları', href: '/guzellik', icon: '✨' },
+      { name: 'Makyaj Rehberi', href: '/makyaj', icon: '💄' },
+      { name: 'Moda Trendleri', href: '/moda', icon: '👗' },
+      { name: 'Stil Önerileri', href: '/stil', icon: '👠' },
+      { name: 'Kıyafet Kombinleri', href: '/kombinler', icon: '👚' }
+    ]
+  },
+  { name: 'Forum', href: '/forum', icon: '💬' },
   { name: 'Alışveriş', href: '/shop', icon: '🛍️' },
   { 
-    name: 'Diğer', 
+    name: 'Daha Fazla', 
     href: '#',
     icon: '📚',
     dropdown: [
-      { name: 'Forum', href: '/forum', icon: '💬' },
-      { name: 'Blog', href: '/blog', icon: '📝' },
       { name: 'Etkinlikler', href: '/etkinlikler', icon: '🗓️' },
-      { name: 'Destek Kaynakları', href: '/destek-kaynaklari', icon: '🤝' },
-      { name: 'Görevler ve Başarımlar', href: '/gorevler-basarimlar', icon: '🏆' },
       { name: 'Kurslar', href: '/courses', icon: '📚' },
-      { name: 'Premium', href: '/premium', icon: '⭐' },
-
+      { name: 'Destek Kaynakları', href: '/destek-kaynaklari', icon: '🤝' },
+      { name: 'Görevler & Başarımlar', href: '/gorevler-basarimlar', icon: '🏆' },
+      { name: 'Premium Üyelik', href: '/premium', icon: '⭐' },
+      { name: 'Hakkımızda', href: '/hakkimizda', icon: 'ℹ️' },
+      { name: 'İletişim', href: '/iletisim', icon: '📞' }
     ]
   }
 ]

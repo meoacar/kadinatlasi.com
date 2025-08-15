@@ -15,7 +15,17 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'cache' => \App\Http\Middleware\CacheResponse::class,
             'premium' => \App\Http\Middleware\CheckPremiumAccess::class,
+            'admin.auth' => \App\Http\Middleware\AdminAuthMiddleware::class,
+            'admin.security' => \App\Http\Middleware\AdminSecurityMiddleware::class,
+            'production.security' => \App\Http\Middleware\ProductionSecurityMiddleware::class,
         ]);
+        
+        // Production ortamında global middleware ekle
+        if (env('APP_ENV') === 'production') {
+            $middleware->web(append: [
+                \App\Http\Middleware\ProductionSecurityMiddleware::class,
+            ]);
+        }
         
         $middleware->api(prepend: [
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,

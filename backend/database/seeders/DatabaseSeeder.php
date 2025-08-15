@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             BabyNameSeeder::class,
             ExtendedBabyNameSeeder::class,
             MoreBabyNamesSeeder::class,
+            BeautyCategorySeeder::class,
             BeautyContentSeeder::class,
             PartnershipSeeder::class,
             HeroSliderSeeder::class,

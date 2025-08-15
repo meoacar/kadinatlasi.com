@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasAdvancedFilters;
 
 class BlogPost extends Model
 {
-    use HasFactory;
+    use HasFactory, HasAdvancedFilters;
 
     protected $fillable = [
         'user_id',
@@ -30,6 +31,16 @@ class BlogPost extends Model
         'tags' => 'array',
         'published_at' => 'datetime',
         'is_premium' => 'boolean',
+    ];
+
+    /**
+     * Aranabilir alanlar
+     */
+    protected $searchable = [
+        'title',
+        'excerpt',
+        'content',
+        'user.name'
     ];
 
     public function user()

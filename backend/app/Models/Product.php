@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use App\Traits\HasAdvancedFilters;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasAdvancedFilters;
 
     protected static function boot()
     {
@@ -107,6 +108,17 @@ class Product extends Model
         'discount_percentage',
         'is_on_sale',
         'image_urls'
+    ];
+
+    /**
+     * Aranabilir alanlar
+     */
+    protected $searchable = [
+        'name',
+        'description',
+        'sku',
+        'brand',
+        'category.name'
     ];
 
     public function category()
