@@ -51,8 +51,6 @@ onUnmounted(() => {
 })
 
 const navigation = [
-  { name: 'Ana Sayfa', href: '/', icon: '🏠' },
-  { name: 'Blog', href: '/blog', icon: '📝' },
   { 
     name: 'Hesaplama Araçları', 
     href: '#',
@@ -102,20 +100,18 @@ const navigation = [
       { name: 'Kıyafet Kombinleri', href: '/kombinler', icon: '👚' }
     ]
   },
-  { name: 'Forum', href: '/forum', icon: '💬' },
-  { name: 'Alışveriş', href: '/shop', icon: '🛍️' },
   { 
-    name: 'Daha Fazla', 
+    name: 'Diğerleri', 
     href: '#',
     icon: '📚',
     dropdown: [
+      { name: 'Forum', href: '/forum', icon: '💬' },
+      { name: 'Blog', href: '/blog', icon: '📝' },
       { name: 'Etkinlikler', href: '/etkinlikler', icon: '🗓️' },
       { name: 'Kurslar', href: '/courses', icon: '📚' },
       { name: 'Destek Kaynakları', href: '/destek-kaynaklari', icon: '🤝' },
       { name: 'Görevler & Başarımlar', href: '/gorevler-basarimlar', icon: '🏆' },
-      { name: 'Premium Üyelik', href: '/premium', icon: '⭐' },
-      { name: 'Hakkımızda', href: '/hakkimizda', icon: 'ℹ️' },
-      { name: 'İletişim', href: '/iletisim', icon: '📞' }
+      { name: 'Premium Üyelik', href: '/premium', icon: '⭐' }
     ]
   }
 ]
