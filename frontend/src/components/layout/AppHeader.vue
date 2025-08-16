@@ -228,7 +228,7 @@ const handleLogout = async () => {
                   Uzman Soruları
                 </RouterLink>
                 
-                <a v-if="authStore.user?.email === 'admin@kadinatlasi.com'" href="http://localhost:8000/admin" target="_blank" @click="userMenuOpen = false" class="user-menu-item">
+                <a v-if="authStore.user?.email === 'admin@kadinatlasi.com'" href="http://31.97.34.163/admin" target="_blank" @click="userMenuOpen = false" class="user-menu-item">
                   <span class="menu-emoji">⚙️</span>
                   Admin Panel
                 </a>
