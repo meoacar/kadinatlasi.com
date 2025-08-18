@@ -1,0 +1,1 @@
+@keyframes spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}@media (max-width: 768px){div[style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr!important}}

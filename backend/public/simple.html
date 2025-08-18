@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KadınAtlası</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; }
+        
+        .header {
+            background: linear-gradient(135deg, #E57399, #F5A9BC);
+            color: white;
+            padding: 1rem 0;
+        }
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .logo { font-size: 1.8rem; font-weight: bold; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: white; text-decoration: none; }
+        .nav-links a:hover { text-decoration: underline; }
+        
+        .hero {
+            background: linear-gradient(135deg, #E57399, #F5A9BC);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+        .btn {
+            background: white;
+            color: #E57399;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+        .btn:hover { background: #f0f0f0; }
+        
+        .features {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .features h2 { text-align: center; margin-bottom: 3rem; color: #333; }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .feature-card h3 { color: #E57399; margin-bottom: 1rem; }
+        .feature-card p { color: #666; }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">KadınAtlası</div>
+            <ul class="nav-links">
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/hesaplama">Hesaplama</a></li>
+                <li><a href="/forum">Forum</a></li>
+                <li><a href="/astroloji">Astroloji</a></li>
+                <li><a href="/gebelik">Gebelik</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/admin">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>KadınAtlası'na Hoş Geldiniz</h1>
+        <p>Kadınların günlük hayatını kolaylaştıran, bilgi alabileceği ve topluluk oluşturabileceği dijital platform</p>
+        <a href="#features" class="btn">Keşfet</a>
+        <a href="/admin" class="btn">Admin Panel</a>
+    </section>
+
+    <section class="features" id="features">
+        <h2>Size Özel Özellikler</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>💖 Kadın Sağlığı</h3>
+                <p>Regl döngüsü, gebelik ve sağlık konularında bilgi alın</p>
+            </div>
+            <div class="feature-card">
+                <h3>✨ Güzellik & Moda</h3>
+                <p>Güzellik ipuçları ve moda trendlerini keşfedin</p>
+            </div>
+            <div class="feature-card">
+                <h3>🧮 Hesaplama Araçları</h3>
+                <p>VKİ, kalori ve gebelik hesaplayıcıları</p>
+            </div>
+            <div class="feature-card">
+                <h3>💬 Topluluk Forum</h3>
+                <p>Diğer kadınlarla deneyim paylaşın</p>
+            </div>
+            <div class="feature-card">
+                <h3>🌟 Astroloji</h3>
+                <p>Günlük burç yorumları ve astroloji rehberi</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 KadınAtlası. Tüm hakları saklıdır.</p>
+        <p><strong>Admin Panel:</strong> <a href="/admin" style="color: #E57399;">admin@kadinatlasi.com / password</a></p>
+    </footer>
+</body>
+</html>

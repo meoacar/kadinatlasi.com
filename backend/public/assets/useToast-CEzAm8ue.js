@@ -1,0 +1,1 @@
+import{r as e}from"./vendor-By8KxUP1.js";const t=e([]),o=()=>{const e=e=>{const o=t.value.findIndex(t=>t.id===e);o>-1&&t.value.splice(o,1)};return{toasts:t,showToast:(o,s="info",a=3e3)=>{const n=Date.now().toString(),r={id:n,message:o,type:s,duration:a};return t.value.push(r),a>0&&setTimeout(()=>{e(n)},a),n},removeToast:e,clearToasts:()=>{t.value=[]}}};export{o as u};

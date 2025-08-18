@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KadınAtlası - Kadınlar İçin Dijital Platform</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#E57399">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="KadınAtlası">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Kadın sağlığı, gebelik takibi, güzellik ipuçları, diyet programları, astroloji yorumları ve hesaplama araçları. Türkiye'nin en kapsamlı kadın platformu.">
+    <meta name="keywords" content="kadın sağlığı, gebelik takibi, VKİ hesaplama, regl takvimi, güzellik, diyet, astroloji, forum, kadın platformu, hesaplama araçları">
+    <meta name="author" content="KadınAtlası.com">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://kadinatlasi.com">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="KadınAtlası.com - Kadınlar İçin Kapsamlı Yaşam Platformu">
+    <meta property="og:description" content="Kadın sağlığı, gebelik takibi, güzellik ipuçları, diyet programları, astroloji yorumları ve hesaplama araçları. Türkiye'nin en kapsamlı kadın platformu.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kadinatlasi.com">
+    <meta property="og:image" content="https://kadinatlasi.com/og-image.jpg">
+    <meta property="og:site_name" content="KadınAtlası.com">
+    <meta property="og:locale" content="tr_TR">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KadınAtlası.com - Kadınlar İçin Kapsamlı Yaşam Platformu">
+    <meta name="twitter:description" content="Kadın sağlığı, gebelik takibi, güzellik ipuçları, diyet programları, astroloji yorumları ve hesaplama araçları.">
+    <meta name="twitter:image" content="https://kadinatlasi.com/og-image.jpg">
+    <meta name="twitter:site" content="@kadinatlasi">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "KadınAtlası.com",
+      "url": "https://kadinatlasi.com",
+      "description": "Kadınlar için kapsamlı yaşam platformu",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://kadinatlasi.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "KadınAtlası.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kadinatlasi.com/logo.png"
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
