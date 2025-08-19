@@ -1,7 +1,20 @@
 <template>
   <div class="home-page">
-    <!-- Hero Slider - Admin Panelden Yönetiliyor -->
-    <HeroSlider />
+    <!-- Basit Hero Section - HeroSlider yerine -->
+    <section class="simple-hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title">💖 Kadın Atlası</h1>
+          <p class="hero-description">
+            Kadınlar için güvenli dijital alan - Sağlık, güzellik, kariyer ve daha fazlası
+          </p>
+          <div class="hero-buttons">
+            <RouterLink to="/register" class="hero-btn primary">Ücretsiz Üye Ol</RouterLink>
+            <RouterLink to="/hesaplama" class="hero-btn secondary">Hesaplama Araçları</RouterLink>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Header Advertisement - Admin Panelden Yönetiliyor -->
     <Advertisement position="header" type="banner" :maxAds="1" />
@@ -210,7 +223,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import PartnershipSection from '@/components/PartnershipSection.vue'
-import HeroSlider from '@/components/HeroSlider.vue'
 import Advertisement from '@/components/Advertisement.vue'
 import { useSEO } from '@/composables/useSEO'
 
@@ -370,6 +382,94 @@ const onToolLeave = () => {
 .home-page {
   min-height: 100vh;
   background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+}
+
+/* Basit Hero Section */
+.simple-hero {
+  background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.simple-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 24px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.hero-description {
+  font-size: 1.4rem;
+  margin-bottom: 48px;
+  opacity: 0.95;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  padding: 18px 36px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.1rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-btn.primary {
+  background: white;
+  color: #ec4899;
+  box-shadow: 0 8px 25px rgba(255,255,255,0.3);
+}
+
+.hero-btn.primary:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(255,255,255,0.4);
+}
+
+.hero-btn.secondary {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+}
+
+.hero-btn.secondary:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(255,255,255,0.2);
 }
 
 /* Core Layout */
@@ -1142,6 +1242,19 @@ const onToolLeave = () => {
 }
 
 @media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-description {
+    font-size: 1.1rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
   .section-title {
     font-size: 2rem;
   }
