@@ -50,6 +50,20 @@ Route::middleware('cache:30')->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/blog-posts', [BlogPostController::class, 'index']);
     Route::get('/blog-posts/{id}', [BlogPostController::class, 'show']);
+    Route::get('/blog-stats', [BlogPostController::class, 'getStats']);
+    
+    // Blog Comments (public read)
+    Route::get('/blog-posts/{id}/comments', [BlogPostController::class, 'getComments']);
+});
+
+// Blog interaction endpoints (auth required)
+Route::middleware('auth:sanctum')->group(function () {
+    // Blog Comments
+    Route::post('/blog-posts/{id}/comments', [BlogPostController::class, 'storeComment']);
+    
+    // Blog Likes
+    Route::get('/blog-posts/{id}/like-status', [BlogPostController::class, 'getLikeStatus']);
+    Route::post('/blog-posts/{id}/toggle-like', [BlogPostController::class, 'toggleLike']);
 });
 
 // Forum routes (public read)

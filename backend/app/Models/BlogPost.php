@@ -67,6 +67,11 @@ class BlogPost extends Model
         return $this->hasMany(BlogComment::class);
     }
 
+    public function likes()
+    {
+        return $this->hasMany(BlogLike::class);
+    }
+
     public function scopePublished($query)
     {
         return $query->where('status', 'published')

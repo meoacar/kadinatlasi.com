@@ -41,13 +41,47 @@
             <span style="font-size: 2.5rem; margin-right: 1rem;">📚</span>
             Son Yazılar
           </h2>
-          <div v-if="loading" style="text-align: center; padding: 3rem 0;">
-            <div style="width: 3rem; height: 3rem; border: 3px solid #f3f4f6; border-top: 3px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+          <!-- Static Content Until API is Fixed -->
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; transition: all 0.3s ease; cursor: pointer;"
+                 @click="$router.push('/blog')"
+                 @mouseover="$event.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'"
+                 @mouseleave="$event.currentTarget.style.boxShadow = 'none'">
+              <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Girişimcilikte İlk Adımlar: İş Fikrinden Başarıya</h3>
+              <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">Girişimcilik yolculuğuna başlamak isteyenler için pratik rehber ve temel adımlar.</p>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #9ca3af; font-size: 0.8rem;">Bugün</span>
+                <span style="color: #3b82f6; font-size: 0.8rem; font-weight: 500;">Devamını Oku →</span>
+              </div>
+            </div>
+            
+            <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; transition: all 0.3s ease; cursor: pointer;"
+                 @click="$router.push('/cv-hazirlama')"
+                 @mouseover="$event.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'"
+                 @mouseleave="$event.currentTarget.style.boxShadow = 'none'">
+              <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">CV Hazırlama Teknikleri: İşverenin Gözünden Kaçmayın</h3>
+              <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">Profesyonel CV hazırlama teknikleri ve işverenlerin dikkat ettiği noktalar.</p>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #9ca3af; font-size: 0.8rem;">Dün</span>
+                <span style="color: #3b82f6; font-size: 0.8rem; font-weight: 500;">Devamını Oku →</span>
+              </div>
+            </div>
+            
+            <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; transition: all 0.3s ease; cursor: pointer;"
+                 @click="$router.push('/blog')"
+                 @mouseover="$event.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'"
+                 @mouseleave="$event.currentTarget.style.boxShadow = 'none'">
+              <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Kadın Girişimciler İçin Networking Stratejileri</h3>
+              <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">İş dünyasında güçlü ağlar kurmanın ve sürdürmenin etkili yolları.</p>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #9ca3af; font-size: 0.8rem;">2 gün önce</span>
+                <span style="color: #3b82f6; font-size: 0.8rem; font-weight: 500;">Devamını Oku →</span>
+              </div>
+            </div>
           </div>
-          <div v-else-if="posts.length === 0" style="text-align: center; padding: 3rem 0; color: #6b7280;">
-            Henüz bu kategoride yazı bulunmuyor.
-          </div>
-          <div v-else style="display: flex; flex-direction: column; gap: 1.5rem;">
+          
+          <!-- Original API Content (Hidden for now) -->
+          <div v-if="false" style="display: flex; flex-direction: column; gap: 1.5rem;">
             <div v-for="post in posts" :key="post.id" 
                  style="border-left: 4px solid #e5e7eb; padding-left: 1.5rem; cursor: pointer; transition: all 0.3s ease;"
                  @click="$router.push(`/blog/${post.id}`)">

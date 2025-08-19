@@ -13,8 +13,25 @@ class CategoryController extends Controller
     {
         $categories = Category::active()
             ->ordered()
-            ->withCount('blogPosts')
-            ->get();
+            ->withCount(['blogPosts' => function ($query) {
+                $query->where('status', 'published');
+            }])
+            ->get()
+            ->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug,
+                    'description' => $category->description,
+                    'color' => $category->color,
+                    'icon' => $category->icon,
+                    'sort_order' => $category->sort_order,
+                    'is_active' => $category->is_active,
+                    'blog_posts_count' => $category->blog_posts_count,
+                    'created_at' => $category->created_at,
+                    'updated_at' => $category->updated_at
+                ];
+            });
 
         return response()->json([
             'success' => true,

@@ -121,13 +121,26 @@
                             {{ (post.user?.name || 'A').charAt(0) }}
                           </div>
                           <span style="font-weight: 500; color: #374151;">{{ post.user?.name || 'Admin' }}</span>
-                          <span v-if="post.user?.isExpert" style="background: #dbeafe; color: #1d4ed8; padding: 2px 6px; border-radius: 8px; font-size: 0.75rem; font-weight: 500;">
+                          <span v-if="post.user?.is_expert" style="background: #dbeafe; color: #1d4ed8; padding: 2px 6px; border-radius: 8px; font-size: 0.75rem; font-weight: 500;">
                             Uzman
                           </span>
                         </div>
-                        <span>{{ formatDate(post.created_at || post.published_at) }}</span>
-                        <span>{{ post.views_count || 0 }} görüntüleme</span>
-                        <span>{{ post.likes_count || 0 }} beğeni</span>
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                          <span style="display: flex; align-items: center; gap: 4px;">
+                            <svg style="width: 14px; height: 14px; color: #64748b;" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                              <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                            </svg>
+                            {{ post.views_count || 0 }}
+                          </span>
+                          <span style="display: flex; align-items: center; gap: 4px;">
+                            <svg style="width: 14px; height: 14px; color: #64748b;" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                            </svg>
+                            {{ post.likes_count || 0 }}
+                          </span>
+                          <span style="color: #64748b;">{{ formatDate(post.created_at || post.published_at) }}</span>
+                        </div>
                       </div>
                     </div>
                     
@@ -190,25 +203,56 @@
               </div>
             </div>
             
-            <!-- Categories Widget -->
-            <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-              <h3 style="font-size: 1.25rem; font-weight: 700; color: #111827; margin-bottom: 20px;">
-                📚 Kategoriler
-              </h3>
-              <div style="display: flex; flex-direction: column; gap: 8px;">
-                <button v-for="category in categories" :key="category.id"
-                        @click="selectCategory(category)"
-                        style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: none; background: transparent; cursor: pointer; border-radius: 8px; transition: background 0.2s; text-align: left;"
-                        @mouseover="$event.currentTarget.style.backgroundColor = '#f9fafb'"
-                        @mouseleave="$event.currentTarget.style.backgroundColor = 'transparent'">
-                  <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 1.2rem;">{{ category.icon }}</span>
-                    <span style="font-size: 0.875rem; font-weight: 500; color: #374151;">{{ category.name }}</span>
+            <!-- Categories Widget - Modern Design -->
+            <div style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border-radius: 20px; padding: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); border: 1px solid #f1f5f9;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+                <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #e57399 0%, #be185d 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(229, 115, 153, 0.3);">
+                  <span style="font-size: 1.5rem;">📚</span>
+                </div>
+                <div>
+                  <h3 style="font-size: 1.375rem; font-weight: 800; color: #111827; margin: 0; line-height: 1.2;">Kategoriler</h3>
+                  <p style="font-size: 0.875rem; color: #64748b; margin: 4px 0 0 0;">İlgi alanını seç</p>
+                </div>
+              </div>
+
+              <!-- Tüm Kategoriler - Modern Card -->
+              <div @click="selectCategory(null)"
+                   :style="`margin-bottom: 16px; padding: 16px; border-radius: 16px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; ${!selectedCategoryId ? 'background: linear-gradient(135deg, #e57399 0%, #be185d 100%); color: white; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(229, 115, 153, 0.4);' : 'background: white; color: #374151; border-color: #e2e8f0; hover:border-color: #e57399; hover:transform: translateY(-1px); hover:box-shadow: 0 8px 20px rgba(0,0,0,0.1);'}`"
+                   @mouseover="if (selectedCategoryId) { $event.currentTarget.style.borderColor = '#e57399'; $event.currentTarget.style.transform = 'translateY(-1px)'; $event.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)'; }"
+                   @mouseleave="if (selectedCategoryId) { $event.currentTarget.style.borderColor = '#e2e8f0'; $event.currentTarget.style.transform = 'translateY(0)'; $event.currentTarget.style.boxShadow = 'none'; }">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div :style="`width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; ${!selectedCategoryId ? 'background: rgba(255,255,255,0.2);' : 'background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);'}`">
+                      <span style="font-size: 1.25rem;">🏠</span>
+                    </div>
+                    <div>
+                      <div :style="`font-size: 1rem; font-weight: 600; margin-bottom: 2px; color: ${!selectedCategoryId ? 'white' : '#111827'};`">Tüm Kategoriler</div>
+                      <div :style="`font-size: 0.75rem; color: ${!selectedCategoryId ? 'rgba(255,255,255,0.8)' : '#64748b'};`">Hepsini görüntüle</div>
+                    </div>
                   </div>
-                  <span style="font-size: 0.75rem; color: #6b7280; background: #f3f4f6; padding: 2px 6px; border-radius: 8px;">
-                    {{ category.postsCount }}
-                  </span>
-                </button>
+                  <div :style="`padding: 8px 12px; border-radius: 12px; font-size: 0.875rem; font-weight: 600; ${!selectedCategoryId ? 'background: rgba(255,255,255,0.2); color: white;' : 'background: linear-gradient(135deg, #e57399 0%, #be185d 100%); color: white;'}`">
+                    {{ stats.totalPosts }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Category Grid -->
+              <div style="display: grid; grid-template-columns: 1fr; gap: 8px;">
+                <div v-for="category in categories" :key="category.id"
+                     @click="selectCategory(category)"
+                     :style="`padding: 14px 16px; border-radius: 14px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; ${selectedCategoryId === category.id ? 'background: linear-gradient(135deg, #e57399 0%, #be185d 100%); color: white; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(229, 115, 153, 0.3);' : 'background: white; color: #374151; border-color: #f1f5f9;'}`"
+                     @mouseover="if (selectedCategoryId !== category.id) { $event.currentTarget.style.borderColor = '#e57399'; $event.currentTarget.style.transform = 'translateY(-1px)'; $event.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.08)'; }"
+                     @mouseleave="if (selectedCategoryId !== category.id) { $event.currentTarget.style.borderColor = '#f1f5f9'; $event.currentTarget.style.transform = 'translateY(0)'; $event.currentTarget.style.boxShadow = 'none'; }">
+                  <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <span style="font-size: 1.1rem;">{{ getCategoryIcon(category.name, category.icon) }}</span>
+                      <span :style="`font-size: 0.875rem; font-weight: 500; color: ${selectedCategoryId === category.id ? 'white' : '#374151'};`">{{ category.name }}</span>
+                    </div>
+                    <span :style="`font-size: 0.75rem; font-weight: 600; padding: 4px 8px; border-radius: 8px; ${selectedCategoryId === category.id ? 'background: rgba(255,255,255,0.2); color: white;' : 'background: #f8fafc; color: #64748b;'}`">
+                      {{ category.postsCount }}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -219,8 +263,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import api from '@/services/api'
 import Advertisement from '@/components/Advertisement.vue'
 import PremiumBadge from '@/components/PremiumBadge.vue'
@@ -234,93 +278,24 @@ useSEO({
 })
 
 const router = useRouter()
+const route = useRoute()
 
 const loading = ref(false)
 const activeFilter = ref('recent')
 const selectedCategoryId = ref<number | null>(null)
 
-const categories = ref([
-  {
-    id: 1,
-    name: 'Sağlık',
-    icon: '🏥',
-    postsCount: 245
-  },
-  {
-    id: 2,
-    name: 'Gebelik & Anne',
-    icon: '🤱',
-    postsCount: 189
-  },
-  {
-    id: 3,
-    name: 'Güzellik & Bakım',
-    icon: '💄',
-    postsCount: 156
-  },
-  {
-    id: 4,
-    name: 'Moda & Stil',
-    icon: '👗',
-    postsCount: 134
-  },
-  {
-    id: 5,
-    name: 'Astroloji',
-    icon: '⭐',
-    postsCount: 98
-  },
-  {
-    id: 6,
-    name: 'Diyet & Fitness',
-    icon: '💪',
-    postsCount: 167
-  }
-])
+const categories = ref([])
 
 const stats = ref({
-  totalPosts: 1247,
-  todayPosts: 12,
-  totalViews: 45892,
-  todayViews: 234,
-  totalCategories: 8,
-  expertPosts: 156
+  totalPosts: 0,
+  todayPosts: 0,
+  totalViews: 0,
+  todayViews: 0,
+  totalCategories: 0,
+  expertPosts: 0
 })
 
-const posts = ref([
-  {
-    id: 1,
-    title: 'Hamilelikte Beslenme: İlk 3 Ay Rehberi',
-    excerpt: 'Hamileliğin ilk üç ayında bebeğinizin sağlıklı gelişimi için hangi besinleri tüketmelisiniz? Uzman doktorumuzdan öneriler...',
-    content: 'Hamileliğin ilk üç ayı hem anne hem de bebek için kritik bir dönemdir. Bu dönemde doğru beslenme alışkanlıkları edinmek...',
-    featured_image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400',
-    created_at: '2024-01-15T10:30:00Z',
-    views_count: 2847,
-    likes_count: 156,
-    tags: ['hamilelik', 'beslenme', 'sağlık'],
-    category: { id: 2, name: 'Gebelik & Anne' },
-    user: { name: 'Dr. Ayşe Kaya', isExpert: true },
-    isPinned: true,
-    isPopular: true,
-    isExpert: true
-  },
-  {
-    id: 2,
-    title: 'Cilt Bakımında Doğal Yöntemler',
-    excerpt: 'Kimyasal ürünler yerine doğal malzemelerle cilt bakımı nasıl yapılır? Evde hazırlayabileceğiniz maskeler ve serumlar...',
-    content: 'Cilt bakımında doğal yöntemler son yıllarda oldukça popüler hale geldi. Evde kolayca hazırlayabileceğiniz...',
-    featured_image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400',
-    created_at: '2024-01-15T09:15:00Z',
-    views_count: 1923,
-    likes_count: 89,
-    tags: ['cilt bakımı', 'doğal', 'güzellik'],
-    category: { id: 3, name: 'Güzellik & Bakım' },
-    user: { name: 'Elif Güzel', isExpert: false },
-    isPinned: false,
-    isPopular: true,
-    isExpert: false
-  }
-])
+const posts = ref([])
 
 const filters = ref([
   { key: 'recent', label: '🕒 En Yeni' },
@@ -331,6 +306,11 @@ const filters = ref([
 
 const filteredPosts = computed(() => {
   let filtered = [...posts.value]
+  
+  // Kategori filtresi uygula
+  if (selectedCategoryId.value) {
+    filtered = filtered.filter(post => post.category?.id === selectedCategoryId.value)
+  }
   
   switch (activeFilter.value) {
     case 'recent':
@@ -345,6 +325,39 @@ const filteredPosts = computed(() => {
       return filtered
   }
 })
+
+const getCategoryIcon = (categoryName: string, existingIcon?: string) => {
+  // Eğer mevcut ikon varsa ve emoji ise kullan
+  if (existingIcon && /[\u{1F000}-\u{1F6FF}]|[\u{2600}-\u{26FF}]/u.test(existingIcon)) {
+    return existingIcon
+  }
+  
+  // Kategori adına göre ikon ata
+  const iconMap: Record<string, string> = {
+    'Kadın Sağlığı': '🏥',
+    'Gebelik & Annelik': '🤱', 
+    'Güzellik & Moda': '✨',
+    'Güzellik İpuçları': '💄',
+    'Makyaj Rehberi': '💋',
+    'Moda Trendleri': '👗',
+    'Diyet & Fitness': '💪',
+    'Saç Bakımı': '👑',
+    'Kariyer & Girişimcilik': '💼',
+    'Psikoloji & Kişisel Gelişim': '🧠',
+    'Astroloji': '⭐',
+    'İlişkiler & Aile': '👥',
+    'Yemek & Tarifler': '🍳',
+    'Seyahat': '✈️',
+    'Teknoloji': '💻',
+    'Eğitim': '📚',
+    'Spor': '🏃‍♀️',
+    'Müzik': '🎵',
+    'Sinema': '🎬',
+    'Kitap': '📖'
+  }
+  
+  return iconMap[categoryName] || '📝'
+}
 
 const formatDate = (dateString: string) => {
   if (!dateString) return ''
@@ -370,14 +383,25 @@ const viewPost = (post: any) => {
 }
 
 const selectCategory = (category: any) => {
-  selectedCategoryId.value = category.id
+  if (category === null) {
+    // Tüm kategoriler seçildi
+    selectedCategoryId.value = null
+    router.push('/blog')
+  } else {
+    selectedCategoryId.value = category.id
+    // Kategori seçildiğinde o kategoriye göre filtrele
+    router.push(`/blog?category=${category.slug || category.id}`)
+  }
 }
 
-onMounted(async () => {
-  loading.value = true
-  
+const loadPosts = async (categoryId?: string) => {
   try {
-    const response = await api.get('/blog-posts')
+    let url = '/blog-posts'
+    if (categoryId) {
+      url += `?category=${categoryId}`
+    }
+    
+    const response = await api.get(url)
     if (response.data.success && response.data.data) {
       const apiData = response.data.data.data || response.data.data
       if (apiData && apiData.length > 0) {
@@ -389,6 +413,66 @@ onMounted(async () => {
           isExpert: post.user?.is_expert || false
         }))
       }
+    }
+  } catch (error) {
+    console.log('Blog yazıları yüklenirken hata:', error)
+  }
+}
+
+const loadStats = async () => {
+  try {
+    // Load blog stats
+    const statsResponse = await api.get('/blog-stats')
+    if (statsResponse.data.success) {
+      stats.value = statsResponse.data.data
+    }
+    
+    // Load categories with post counts
+    const categoriesResponse = await api.get('/categories')
+    if (categoriesResponse.data.success) {
+      const apiCategories = categoriesResponse.data.data
+      categories.value = apiCategories.map(cat => ({
+        id: cat.id,
+        name: cat.name,
+        slug: cat.slug,
+        icon: cat.icon || '📝',
+        postsCount: cat.blog_posts_count || 0
+      }))
+    }
+  } catch (error) {
+    console.error('Stats yüklenirken hata:', error)
+  }
+}
+
+// Route değişikliklerini izle
+watch(() => route.query.category, (newCategory) => {
+  if (newCategory) {
+    // Kategori slug'ına göre kategori ID'sini bul
+    const category = categories.value.find(cat => cat.slug === newCategory || cat.id.toString() === newCategory)
+    selectedCategoryId.value = category?.id || null
+    loadPosts(newCategory as string)
+  } else {
+    selectedCategoryId.value = null
+    loadPosts()
+  }
+}, { immediate: true })
+
+onMounted(async () => {
+  loading.value = true
+  
+  try {
+    // Load stats and categories first
+    await loadStats()
+    
+    // Check if there's a category parameter
+    const categoryParam = route.query.category as string
+    if (categoryParam) {
+      await loadPosts(categoryParam)
+      // Kategori slug'ına göre kategori ID'sini bul
+      const category = categories.value.find(cat => cat.slug === categoryParam || cat.id.toString() === categoryParam)
+      selectedCategoryId.value = category?.id || null
+    } else {
+      await loadPosts()
     }
   } catch (error) {
     console.log('API hatası, örnek veriler kullanılıyor:', error)

@@ -64,6 +64,10 @@ const router = createRouter({
       component: () => import('../views/calculator/FinancialPlannerView.vue'),
     },
     {
+      path: '/hesaplama/finans',
+      redirect: '/hesaplama/finans-planlayici'
+    },
+    {
       path: '/hesaplama/dogurganlik-takibi',
       name: 'fertility-tracker',
       component: () => import('../views/calculator/FertilityTrackerView.vue'),

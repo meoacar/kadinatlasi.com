@@ -83,6 +83,170 @@ class BlogPostSeeder extends Seeder
 </ul>',
                 'category_id' => $categories->where('slug', 'guzellik-moda')->first()->id,
                 'tags' => ['cilt bakımı', 'doğal', 'güzellik', 'maske'],
+            ],
+            [
+                'title' => 'Girişimcilikte İlk Adımlar: İş Fikrinden Başarıya',
+                'excerpt' => 'Girişimcilik yolculuğuna başlamak isteyenler için pratik rehber ve temel adımlar.',
+                'content' => '<p>Girişimcilik, finansal özgürlük ve kendi işinizin patronu olma hayalini gerçekleştirmenin en etkili yoludur. İşte başarılı bir girişimcilik yolculuğu için atmanız gereken temel adımlar:</p>
+
+<h2>1. İş Fikri Geliştirme</h2>
+<p>Her başarılı iş, güçlü bir fikirle başlar:</p>
+<ul>
+<li>Pazar araştırması yapın ve ihtiyaçları analiz edin</li>
+<li>Kendi yeteneklerinizi ve tutkularınızı değerlendirin</li>
+<li>Rekabet analizi yapın</li>
+<li>Fikrinizi potansiyel müşterilerle test edin</li>
+</ul>
+
+<h2>2. İş Planı Hazırlama</h2>
+<p>Detaylı bir iş planı, başarınızın yol haritasıdır. İş planınızda şunlar yer almalı:</p>
+<ul>
+<li>Executive summary</li>
+<li>Pazar analizi</li>
+<li>Pazarlama stratejisi</li>
+<li>Finansal projeksiyonlar</li>
+<li>Risk analizi</li>
+</ul>
+
+<h2>3. Finansman Seçenekleri</h2>
+<p>İş kurma sürecinde finansman kritik öneme sahiptir:</p>
+<ul>
+<li>Kişisel tasarruflar</li>
+<li>Aile ve arkadaş desteği</li>
+<li>Banka kredileri</li>
+<li>KOSGEB destekleri</li>
+<li>Melek yatırımcılar</li>
+<li>Girişim sermayesi fonları</li>
+</ul>
+
+<h2>4. Yasal Süreçler</h2>
+<p>İşinizi resmi olarak kurmak için gerekli adımlar:</p>
+<ul>
+<li>Şirket türü seçimi (Ltd, A.Ş., Şahıs şirketi)</li>
+<li>Ticaret sicil kaydı</li>
+<li>Vergi levhası alımı</li>
+<li>SGK işlemleri</li>
+<li>Gerekli lisans ve izinler</li>
+</ul>',
+                'category_id' => $categories->where('slug', 'kariyer-girisimcilik')->first()->id,
+                'tags' => ['girişimcilik', 'iş kurma', 'startup', 'kariyer'],
+            ],
+            [
+                'title' => 'CV Hazırlama Teknikleri: İşverenin Gözünden Kaçmayın',
+                'excerpt' => 'Profesyonel CV hazırlama teknikleri ve işverenlerin dikkat ettiği noktalar.',
+                'content' => '<p>Doğru hazırlanmış bir CV, iş arama sürecinizin en kritik bileşenidir. İşverenlerin dikkatini çeken ve mülakata çağırma şansınızı artıran CV hazırlama teknikleri:</p>
+
+<h2>CV\'nin Temel Bölümleri</h2>
+
+<h3>1. Kişisel Bilgiler</h3>
+<ul>
+<li>Ad, soyad</li>
+<li>İletişim bilgileri (telefon, e-posta, LinkedIn profili)</li>
+<li>Profesyonel fotoğraf (opsiyonel)</li>
+</ul>
+
+<h3>2. Profesyonel Özet</h3>
+<p>2-3 cümlelik özet bölümünde kendinizi ve hedeflerinizi net bir şekilde ifade edin.</p>
+
+<h3>3. İş Deneyimi</h3>
+<ul>
+<li>En son işinizden başlayarak ters kronolojik sırada</li>
+<li>Şirket adı, pozisyon, çalışma tarihleri</li>
+<li>Başarılarınızı sayısal verilerle destekleyin</li>
+<li>İş tanımından çok başarılarınıza odaklanın</li>
+</ul>
+
+<h3>4. Eğitim Bilgileri</h3>
+<ul>
+<li>Üniversite, bölüm, mezuniyet yılı</li>
+<li>GPA (3.0 üzerindeyse)</li>
+<li>İlgili sertifikalar ve kurslar</li>
+</ul>
+
+<h2>CV Hazırlama İpuçları</h2>
+<ul>
+<li>Maksimum 2 sayfa olmalı</li>
+<li>Temiz ve okunabilir font kullanın</li>
+<li>Anahtar kelimeleri stratejik olarak yerleştirin</li>
+<li>Her pozisyon için CV\'yi özelleştirin</li>
+<li>Yazım hatalarına dikkat edin</li>
+<li>PDF formatında gönderin</li>
+</ul>
+
+<h2>Kaçınılması Gereken Hatalar</h2>
+<ul>
+<li>Çok uzun veya çok kısa CV</li>
+<li>İlgisiz kişisel bilgiler</li>
+<li>Standart CV şablonları</li>
+<li>Açıklanamayan boşluklar</li>
+<li>Abartılı ifadeler</li>
+</ul>',
+                'category_id' => $categories->where('slug', 'kariyer-girisimcilik')->first()->id,
+                'tags' => ['cv', 'iş arama', 'kariyer', 'mülakat'],
+            ],
+            [
+                'title' => 'Kadın Girişimciler İçin Networking Stratejileri',
+                'excerpt' => 'Iş dünyasında güçlü ağlar kurmanın ve sürdürmenin etkili yolları.',
+                'content' => '<p>Networking, özellikle kadın girişimciler için kritik öneme sahip bir beceridir. Doğru ağ ilişkileri kurmak, iş fırsatlarını artırır ve kariyerinizi hızlandırır.</p>
+
+<h2>Networking\'in Önemi</h2>
+<p>İş dünyasında başarı sadece ne bildiğinizle değil, kimi tanıdığınızla da yakından ilgilidir:</p>
+<ul>
+<li>Yeni iş fırsatları</li>
+<li>Mentorluk ilişkileri</li>
+<li>İş ortaklıkları</li>
+<li>Sektörel bilgi paylaşımı</li>
+<li>Marka bilinirliği</li>
+</ul>
+
+<h2>Etkili Networking Stratejileri</h2>
+
+<h3>1. Hazırlık Aşaması</h3>
+<ul>
+<li>Kısa ve etkileyici bir tanıtım hazırlayın</li>
+<li>Profesyonel kartvizit yaptırın</li>
+<li>LinkedIn profilinizi güncelleyin</li>
+<li>Hedef kitleyi belirleyin</li>
+</ul>
+
+<h3>2. Etkinlik Seçimi</h3>
+<ul>
+<li>Sektörel konferanslar</li>
+<li>Girişimcilik seminerleri</li>
+<li>Kadın girişimci toplulukları</li>
+<li>Coworking space etkinlikleri</li>
+<li>Online networking platformları</li>
+</ul>
+
+<h3>3. İletişim Teknikleri</h3>
+<ul>
+<li>Aktif dinleyin</li>
+<li>Açık uçlu sorular sorun</li>
+<li>Samimi ve doğal olun</li>
+<li>Değer yaratmaya odaklanın</li>
+<li>Takip sürecini ihmal etmeyin</li>
+</ul>
+
+<h2>Dijital Networking</h2>
+<p>Çağımızda dijital platformlar networking için büyük fırsatlar sunuyor:</p>
+<ul>
+<li>LinkedIn gruplarına katılın</li>
+<li>Twitter\'da sektör liderlerini takip edin</li>
+<li>Instagram\'da hikayenizi paylaşın</li>
+<li>Podcast\'lere konuk olun</li>
+<li>Blog yazın ve uzman olarak görünün</li>
+</ul>
+
+<h2>Kadın Girişimci Ağları</h2>
+<ul>
+<li>KAGİDER (Kadın Girişimcileri Derneği)</li>
+<li>Women in Business</li>
+<li>Endeavor Kadın Girişimci Ağı</li>
+<li>TUSIAD Kadın Girişimciler Kurulu</li>
+<li>Yerel kadın girişimci toplulukları</li>
+</ul>',
+                'category_id' => $categories->where('slug', 'kariyer-girisimcilik')->first()->id,
+                'tags' => ['networking', 'kadın girişimci', 'iş ağları', 'kariyer'],
             ]
         ];
 

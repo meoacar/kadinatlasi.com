@@ -61,7 +61,7 @@ const navigation = [
       { name: 'Gebelik Hesaplayıcı', href: '/hesaplama/gebelik', icon: '🤰' },
       { name: 'Kalori Hesaplayıcı', href: '/hesaplama/kalori', icon: '🍎' },
       { name: 'Su İhtiyacı', href: '/hesaplama/su-ihtiyaci', icon: '💧' },
-      { name: 'Finans Planlayıcı', href: '/hesaplama/finans', icon: '💰' }
+      { name: 'Finans Planlayıcı', href: '/hesaplama/finans-planlayici', icon: '💰' }
     ]
   },
   { 

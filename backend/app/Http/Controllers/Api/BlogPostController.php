@@ -12,12 +12,19 @@ class BlogPostController extends Controller
     public function index(Request $request)
     {
         $query = BlogPost::with(['user', 'category'])
-            ->published()
-            ->latest('published_at');
+            ->where('status', 'published')
+            ->latest('created_at');
 
         // Filter by category
         if ($request->has('category_id')) {
             $query->where('category_id', $request->category_id);
+        }
+
+        // Filter by category slug
+        if ($request->has('category')) {
+            $query->whereHas('category', function($q) use ($request) {
+                $q->where('slug', $request->category);
+            });
         }
 
         // Search
@@ -55,7 +62,7 @@ class BlogPostController extends Controller
     public function show($id)
     {
         $post = BlogPost::with(['user', 'category', 'comments'])
-            ->published()
+            ->where('status', 'published')
             ->findOrFail($id);
 
         $user = auth()->user();
@@ -152,6 +159,139 @@ class BlogPostController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Blog yazısı başarıyla silindi'
+        ]);
+    }
+
+    // Comments Methods
+    public function getComments($id)
+    {
+        $post = BlogPost::findOrFail($id);
+        $comments = $post->comments()
+            ->with('user')
+            ->where('is_approved', true)
+            ->latest()
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $comments
+        ]);
+    }
+
+    public function storeComment($id, Request $request)
+    {
+        $post = BlogPost::findOrFail($id);
+        
+        $request->validate([
+            'content' => 'required|string|max:500'
+        ]);
+
+        $comment = $post->comments()->create([
+            'user_id' => auth()->id(),
+            'content' => $request->content,
+            'is_approved' => true, // Auto-approve for now
+        ]);
+
+        $comment->load('user');
+
+        return response()->json([
+            'success' => true,
+            'data' => $comment,
+            'message' => 'Yorum başarıyla eklendi'
+        ]);
+    }
+
+    // Likes Methods
+    public function getLikeStatus($id)
+    {
+        $post = BlogPost::findOrFail($id);
+        $userId = auth()->id();
+        
+        $isLiked = $post->likes()->where('user_id', $userId)->exists();
+
+        return response()->json([
+            'success' => true,
+            'isLiked' => $isLiked,
+            'likesCount' => $post->likes_count
+        ]);
+    }
+
+    public function toggleLike($id)
+    {
+        $post = BlogPost::findOrFail($id);
+        $userId = auth()->id();
+        
+        $existingLike = $post->likes()->where('user_id', $userId)->first();
+        
+        if ($existingLike) {
+            // Unlike
+            $existingLike->delete();
+            $post->decrement('likes_count');
+            $isLiked = false;
+        } else {
+            // Like
+            $post->likes()->create(['user_id' => $userId]);
+            $post->increment('likes_count');
+            $isLiked = true;
+        }
+
+        return response()->json([
+            'success' => true,
+            'isLiked' => $isLiked,
+            'likesCount' => $post->fresh()->likes_count
+        ]);
+    }
+
+    // Stats Method
+    public function getStats()
+    {
+        // Blog yazı sayıları
+        $totalPosts = BlogPost::where('status', 'published')->count();
+        $todayPosts = BlogPost::where('status', 'published')
+            ->whereDate('published_at', today())
+            ->count();
+            
+        // Görüntülenme sayıları - null değerleri 0 olarak say
+        $totalViews = BlogPost::where('status', 'published')->sum('views_count') ?? 0;
+        $todayViews = BlogPost::where('status', 'published')
+            ->whereDate('updated_at', today())
+            ->sum('views_count') ?? 0;
+            
+        // Aktif kategori sayısı
+        $totalCategories = \App\Models\Category::where('is_active', true)->count();
+        
+        // Expert yazı sayısı (is_expert alanı yoksa 0 döndür)
+        $expertPosts = 0;
+        try {
+            $expertPosts = BlogPost::where('status', 'published')
+                ->whereHas('user', function($q) {
+                    $q->where('is_expert', true);
+                })->count();
+        } catch (\Exception $e) {
+            // is_expert alanı yoksa 0 döndür
+            $expertPosts = 0;
+        }
+        
+        // Toplam beğeni sayısı
+        $totalLikes = BlogPost::where('status', 'published')->sum('likes_count') ?? 0;
+        
+        // Bu hafta yayınlanan yazılar
+        $weeklyPosts = BlogPost::where('status', 'published')
+            ->whereBetween('published_at', [now()->startOfWeek(), now()->endOfWeek()])
+            ->count();
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'totalPosts' => $totalPosts,
+                'todayPosts' => $todayPosts,
+                'weeklyPosts' => $weeklyPosts,
+                'totalViews' => $totalViews,
+                'todayViews' => $todayViews,
+                'totalLikes' => $totalLikes,
+                'totalCategories' => $totalCategories,
+                'expertPosts' => $expertPosts
+            ]
         ]);
     }
 }

@@ -25,15 +25,15 @@
           </div>
           
           <div class="stat-item">
-            <div class="stat-number">{{ gamificationStats.points }}</div>
+            <div class="stat-number">{{ gamificationStats?.points || 0 }}</div>
             <div class="stat-label">Puan</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number">{{ gamificationStats.level }}</div>
+            <div class="stat-number">{{ gamificationStats?.level || 1 }}</div>
             <div class="stat-label">Seviye</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number">{{ gamificationStats.daily_streak }}</div>
+            <div class="stat-number">{{ gamificationStats?.daily_streak || 0 }}</div>
             <div class="stat-label">Gün Serisi</div>
           </div>
         </div>
@@ -115,8 +115,8 @@
             <div class="health-icon">💪</div>
             <div class="health-info">
               <div class="health-title">Fitness</div>
-              <div class="health-text">{{ fitnessStats.today_minutes || 0 }} dk antrenman</div>
-              <div class="health-subtext">{{ fitnessStats.today_calories || 0 }} kalori yakıldı</div>
+              <div class="health-text">{{ fitnessStats?.today_minutes || 0 }} dk antrenman</div>
+              <div class="health-subtext">{{ fitnessStats?.today_calories || 0 }} kalori yakıldı</div>
             </div>
             <button @click.prevent="$router.push('/fitness')" class="health-btn" type="button">→</button>
           </div>
@@ -126,7 +126,7 @@
             <div class="health-info">
               <div class="health-title">Ruh Hali</div>
               <div class="health-text">{{ currentMood || 'Belirtilmemiş' }}</div>
-              <div class="health-subtext">{{ moodStats.streak || 0 }} günlük takip</div>
+              <div class="health-subtext">{{ moodStats?.streak || 0 }} günlük takip</div>
             </div>
             <button @click.prevent="$router.push('/psikoloji')" class="health-btn" type="button">→</button>
           </div>
